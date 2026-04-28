@@ -1,0 +1,1248 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>金舒敏 · 快手经营分析师应聘作品集</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <script src="https://cdn.jsdelivr.net/npm/echarts@5/dist/echarts.min.js"></script>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            background-color: #f5f7fa;
+            color: #1a1a2e;
+            line-height: 1.6;
+            -webkit-font-smoothing: antialiased;
+        }
+
+        .container { max-width: 1100px; margin: 0 auto; padding: 2rem; }
+
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #1e3a5f 0%, #2c5282 100%);
+            color: #ffffff;
+            border-radius: 16px;
+            padding: 3rem 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 10px 40px rgba(30, 58, 95, 0.2);
+        }
+        .header-top {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 1.5rem;
+        }
+        .header-left h1 { 
+            font-size: 2.4rem; 
+            font-weight: 700; 
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.02em;
+        }
+        .header-left .tagline { 
+            font-size: 1.1rem; 
+            color: rgba(255,255,255,0.9); 
+            font-weight: 400;
+            margin-bottom: 0.3rem;
+        }
+        .header-left .sub { 
+            font-size: 0.85rem; 
+            color: rgba(255,255,255,0.7); 
+            font-weight: 300;
+        }
+        .header-right {
+            text-align: right;
+        }
+        .header-right .badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.15);
+            backdrop-filter: blur(10px);
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            margin-bottom: 0.5rem;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .contact-bar {
+            display: flex;
+            gap: 2rem;
+            flex-wrap: wrap;
+            padding-top: 1.5rem;
+            border-top: 1px solid rgba(255,255,255,0.15);
+        }
+        .contact-bar span { 
+            color: rgba(255,255,255,0.85); 
+            font-size: 0.85rem;
+        }
+        .contact-bar i { 
+            margin-right: 0.4rem; 
+            color: rgba(255,255,255,0.6);
+            width: 16px;
+            text-align: center;
+        }
+
+        /* 数据声明 */
+        .data-notice {
+            background: #e8f4f8;
+            border-left: 4px solid #2c5282;
+            padding: 1rem 1.5rem;
+            border-radius: 0 8px 8px 0;
+            margin-bottom: 2rem;
+            font-size: 0.8rem;
+            color: #1e3a5f;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        .data-notice i { font-size: 1.2rem; color: #2c5282; }
+
+        /* Section通用样式 */
+        .section {
+            background: #ffffff;
+            border-radius: 12px;
+            padding: 2rem;
+            margin-bottom: 1.5rem;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.06);
+            border: 1px solid #e2e8f0;
+        }
+        .section-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.6rem;
+            border-bottom: 2px solid #2c5282;
+            display: inline-block;
+            color: #1e3a5f;
+        }
+        .section-subtitle {
+            font-size: 0.9rem;
+            color: #64748b;
+            margin-bottom: 1rem;
+            font-weight: 400;
+        }
+
+        /* 两栏布局 */
+        .two-columns {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 2rem;
+        }
+        .three-columns {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1.5rem;
+        }
+
+        /* 能力卡片 */
+        .skill-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1rem;
+            margin: 1rem 0;
+        }
+        .skill-card {
+            background: #f8fafc;
+            border: 1px solid #e2e8f0;
+            border-radius: 8px;
+            padding: 1.2rem;
+            transition: all 0.2s ease;
+        }
+        .skill-card:hover {
+            border-color: #2c5282;
+            box-shadow: 0 4px 12px rgba(44, 82, 130, 0.08);
+        }
+        .skill-card h4 {
+            font-size: 0.9rem;
+            color: #1e3a5f;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        .skill-card h4 i { color: #2c5282; font-size: 0.9rem; }
+        .skill-card p {
+            font-size: 0.8rem;
+            color: #64748b;
+            line-height: 1.5;
+        }
+        .skill-tag {
+            display: inline-block;
+            background: #e8f4f8;
+            color: #2c5282;
+            padding: 0.2rem 0.6rem;
+            border-radius: 12px;
+            font-size: 0.7rem;
+            margin-top: 0.5rem;
+            margin-right: 0.3rem;
+            font-weight: 500;
+        }
+
+        /* 经历时间线 */
+        .timeline {
+            position: relative;
+            padding-left: 1.5rem;
+        }
+        .timeline::before {
+            content: '';
+            position: absolute;
+            left: 0;
+            top: 0;
+            bottom: 0;
+            width: 2px;
+            background: #e2e8f0;
+        }
+        .timeline-item {
+            position: relative;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid #f1f5f9;
+        }
+        .timeline-item:last-child {
+            border-bottom: none;
+            margin-bottom: 0;
+            padding-bottom: 0;
+        }
+        .timeline-item::before {
+            content: '';
+            position: absolute;
+            left: -1.5rem;
+            top: 0.3rem;
+            width: 10px;
+            height: 10px;
+            border-radius: 50%;
+            background: #2c5282;
+            border: 2px solid #fff;
+            box-shadow: 0 0 0 2px #2c5282;
+            transform: translateX(-4px);
+        }
+        .timeline-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: baseline;
+            margin-bottom: 0.5rem;
+        }
+        .timeline-title {
+            font-weight: 600;
+            color: #1e3a5f;
+            font-size: 0.95rem;
+        }
+        .timeline-date {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            font-weight: 400;
+        }
+        .timeline-content {
+            font-size: 0.85rem;
+            color: #475569;
+            line-height: 1.6;
+        }
+        .timeline-content ul {
+            margin: 0.5rem 0 0 1.2rem;
+            padding: 0;
+        }
+        .timeline-content li {
+            margin-bottom: 0.3rem;
+        }
+
+        /* 指标表格 */
+        .metric-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.8rem;
+            margin: 1rem 0;
+        }
+        .metric-table th, .metric-table td {
+            padding: 0.7rem 0.5rem;
+            text-align: center;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .metric-table th {
+            font-weight: 600;
+            background-color: #f8fafc;
+            color: #475569;
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .metric-table td {
+            color: #334155;
+        }
+        .metric-table tr:hover td {
+            background: #f8fafc;
+        }
+        .badge-up { color: #059669; font-weight: 600; }
+        .badge-down { color: #dc2626; font-weight: 600; }
+        .badge-neutral { color: #64748b; }
+
+        /* ECharts容器 */
+        .chart-container {
+            width: 100%;
+            border-radius: 8px;
+            background: #ffffff;
+            margin: 1rem 0;
+        }
+        .chart-caption {
+            text-align: center;
+            font-size: 0.75rem;
+            color: #94a3b8;
+            margin-top: 0.5rem;
+            font-style: italic;
+        }
+
+        /* 高亮框 */
+        .highlight-box {
+            background: #f0f9ff;
+            border-left: 3px solid #2c5282;
+            padding: 1.2rem;
+            margin: 1rem 0;
+            border-radius: 0 8px 8px 0;
+        }
+        .highlight-box h4 {
+            color: #1e3a5f;
+            margin-bottom: 0.5rem;
+            font-size: 0.9rem;
+        }
+        .highlight-box p {
+            font-size: 0.85rem;
+            color: #475569;
+            margin: 0;
+            line-height: 1.6;
+        }
+
+        /* 来源标注 */
+        .source-tag {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.3rem;
+            font-size: 0.7rem;
+            padding: 0.15rem 0.5rem;
+            border-radius: 4px;
+            margin-left: 0.3rem;
+            font-weight: 500;
+        }
+        .source-s { background: #dcfce7; color: #166534; }
+        .source-a { background: #dbeafe; color: #1e40af; }
+        .source-erp { background: #fef3c7; color: #92400e; }
+
+        /* 脚注 */
+        .footnote {
+            font-size: 0.75rem;
+            color: #94a3b8;
+            margin-top: 1rem;
+            padding-top: 1rem;
+            border-top: 1px solid #e2e8f0;
+        }
+
+        /* 核心成果展示 */
+        .result-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 1rem;
+            margin: 1.5rem 0;
+        }
+        .result-card {
+            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+            border: 1px solid #e2e8f0;
+            border-radius: 10px;
+            padding: 1.2rem;
+            text-align: center;
+            transition: transform 0.2s ease;
+        }
+        .result-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 16px rgba(0,0,0,0.08);
+        }
+        .result-card .label { 
+            font-size: 0.7rem; 
+            text-transform: uppercase;
+            letter-spacing: 0.8px; 
+            color: #64748b; 
+            margin-bottom: 0.6rem;
+            font-weight: 600;
+        }
+        .result-card .value { 
+            font-size: 1.4rem; 
+            font-weight: 700; 
+            color: #1e3a5f; 
+            line-height: 1.3;
+        }
+        .result-card .context { 
+            font-size: 0.75rem; 
+            margin-top: 0.4rem; 
+            color: #94a3b8;
+        }
+
+        /* 风险提示 */
+        .disclaimer {
+            background: #fefce8;
+            border: 1px solid #fde68a;
+            border-radius: 8px;
+            padding: 1rem;
+            margin: 1.5rem 0;
+            font-size: 0.8rem;
+            color: #854d0e;
+        }
+        .disclaimer strong { color: #a16207; }
+
+        /* 数据来源附录表格 */
+        .source-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.8rem;
+            margin: 1rem 0;
+        }
+        .source-table th, .source-table td {
+            padding: 0.6rem 0.5rem;
+            text-align: left;
+            border-bottom: 1px solid #e2e8f0;
+        }
+        .source-table th {
+            font-weight: 600;
+            background: #f8fafc;
+            color: #475569;
+            font-size: 0.75rem;
+        }
+        .source-table td {
+            color: #334155;
+            font-size: 0.75rem;
+        }
+        .source-table a {
+            color: #2c5282;
+            text-decoration: none;
+        }
+        .source-table a:hover {
+            text-decoration: underline;
+        }
+
+        /* 响应式 */
+        @media (max-width: 768px) {
+            .container { padding: 1rem; }
+            .header { padding: 2rem 1.5rem; }
+            .header-top { flex-direction: column; gap: 1rem; }
+            .header-right { text-align: left; }
+            .two-columns, .three-columns, .result-grid { grid-template-columns: 1fr; }
+            .skill-grid { grid-template-columns: 1fr; }
+            .contact-bar { flex-direction: column; gap: 0.5rem; }
+        }
+        @media print {
+            body { 
+	        -webkit-print-color-adjust: exact;
+	        print-color-adjust: exact;
+            }        
+            @page { size: A4 landscape; margin: 12mm; }
+            .container { max-width: 100%; padding: 0; }
+            .header, .section, .highlight-box, .disclaimer, .data-notice { box-shadow: none; border: 1px solid #ccc; }
+            .two-columns { grid-template-columns: 1fr 1fr; gap: 1.5rem; break-inside: avoid; page-break-inside: avoid; }
+    	    .chart-container { break-inside: avoid; page-break-inside: avoid; height: 240px !important; }
+    	    .result-grid { break-inside: avoid; page-break-inside: avoid; }
+    	    .section { break-inside: auto; page-break-inside: auto; }
+    	    table, .metric-table, .source-table { break-inside: auto; page-break-inside: auto; }
+    	    body { font-size: 11px; }
+    	    h1 { font-size: 2rem; }
+    	    .tagline { font-size: 1rem; }
+    	    .section-title { font-size: 1.1rem; }
+    	    .chart-caption { font-size: 0.7rem; }
+    	    .metric-table th, .metric-table td { font-size: 0.7rem; padding: 0.4rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <!-- 头部 -->
+    <div class="header">
+        <div class="header-top">
+            <div class="header-left">
+                <h1>金舒敏</h1>
+                <div class="tagline">应聘岗位：快手经营分析师</div>
+                <div class="sub">工商管理 · GPA 3.9/5.0 · 专业排名前2.5% · 初级会计资格</div>
+            </div>
+            <div class="header-right">
+                <div class="badge"><i class="fas fa-check-circle"></i> 数据已核验</div>
+                <div class="badge"><i class="fas fa-file-alt"></i> 财报来源：港交所公告</div>
+            </div>
+        </div>
+        <div class="contact-bar">
+            <span><i class="fas fa-graduation-cap"></i> 工商管理学士</span>
+            <span><i class="fas fa-certificate"></i> 初级会计（会计实务99分）</span>
+            <span><i class="fas fa-language"></i> CET-4/6</span>
+            <span><i class="fas fa-chart-line"></i> 自修：中级财务会计、管理会计</span>
+            <span><i class="fas fa-tools"></i> Excel高级应用 / PPT / 基础SQL（学习中）</span>
+        </div>
+    </div>
+
+    <!-- 数据声明 -->
+    <div class="data-notice">
+        <i class="fas fa-shield-alt"></i>
+        <div>
+            <strong>数据真实性声明：</strong>本作品集所有快手相关数据均来源于港交所官方公告及权威财经媒体，已逐一核对原始财报。ERP沙盘数据为模拟经营真实记录，标注"方法论可迁移"部分为分析框架展示。完整数据来源见附录。
+        </div>
+    </div>
+
+    <!-- 第一部分：岗位理解与能力匹配 -->
+    <div class="section">
+        <div class="section-title">岗位理解与核心能力匹配</div>
+        <div class="section-subtitle">基于快手经营分析师JD（政策审核 · 合同风控 · 流程优化 · 预算管控 · 数据分析）</div>
+
+        <div class="skill-grid">
+            <div class="skill-card">
+                <h4><i class="fas fa-search-dollar"></i> 财务审核与风险把控</h4>
+                <p>ERP沙盘三届统筹中独立负责预算编制、资金测算、长短贷利息计算及还款计划制定，培养了对现金流风险的敏锐度。</p>
+                <span class="skill-tag">预算编制</span>
+                <span class="skill-tag">资金风控</span>
+                <span class="skill-tag">利息测算</span>
+            </div>
+            <div class="skill-card">
+                <h4><i class="fas fa-sync-alt"></i> 流程优化与效率提升</h4>
+                <p>通过产销协同机制设计，将库存周转从207天优化至66天；建立动态资金调配机制，实现经营现金流从-24万到+77万的转正。</p>
+                <span class="skill-tag">库存优化</span>
+                <span class="skill-tag">产销协同</span>
+                <span class="skill-tag">资金周转</span>
+            </div>
+            <div class="skill-card">
+                <h4><i class="fas fa-chart-bar"></i> 数据分析与报告产出</h4>
+                <p>熟练运用Excel进行财务建模与数据透视；具备基础的数据清洗与可视化能力，能产出结构化的经营分析报告。</p>
+                <span class="skill-tag">Excel财务测算</span>
+                <span class="skill-tag">数据透视</span>
+                <span class="skill-tag">经营分析</span>
+            </div>
+            <div class="skill-card">
+                <h4><i class="fas fa-handshake"></i> 跨部门协同与沟通</h4>
+                <p>沙盘统筹中协调生产、采购、销售、财务多模块决策；理解业务语言与财务语言的转换，支撑业财融合落地。</p>
+                <span class="skill-tag">业财融合</span>
+                <span class="skill-tag">跨部门沟通</span>
+                <span class="skill-tag">统筹能力</span>
+            </div>
+        </div>
+
+        <div class="highlight-box">
+            <h4><i class="fas fa-lightbulb" style="color: #d97706;"></i> 对经营分析师岗位的理解</h4>
+            <p>经营分析师是业务与财务的"翻译官"和"守门员"：既要通过数据监控发现业务异常（如费用率突增、回款周期延长），也要通过流程设计防范财务风险（如合同付款条款审核、预算超支预警）。ERP沙盘中的"利润≠现金"现象，体现了经营分析中"实质重于形式"的思维——这与快手2025年停止披露GMV、转向质量指标的逻辑相通：指标要看本质，不能只看表面数字。</p>
+        </div>
+    </div>
+
+    <!-- 第二部分：ERP沙盘经营分析实战 -->
+    <div class="section">
+        <div class="section-title">ERP沙盘经营分析实战 · 财务统筹视角</div>
+        <div class="section-subtitle">三届沙盘模拟中独立承担预算编制、资金规划、财务决策及经营分析全流程</div>
+
+        <div class="result-grid">
+            <div class="result-card">
+                <div class="label">净利润</div>
+                <div class="value">11→34→21万</div>
+                <div class="context">第三年达峰值，第四年主动优化结构</div>
+            </div>
+            <div class="result-card">
+                <div class="label">经营现金流</div>
+                <div class="value">12→-24→77万</div>
+                <div class="context">第四年转正，验证利润≠现金</div>
+            </div>
+            <div class="result-card">
+                <div class="label">库存周转天数</div>
+                <div class="value">207→66天</div>
+                <div class="context">优化68%，产销协同机制生效</div>
+            </div>
+            <div class="result-card">
+                <div class="label">广告费用率</div>
+                <div class="value">13.5%→8.7%</div>
+                <div class="context">效率驱动替代规模驱动</div>
+            </div>
+        </div>
+
+        <div class="two-columns">
+            <div>
+                <div id="chart_profit_cash" class="chart-container" style="height: 260px;"></div>
+                <p class="chart-caption">图1：净利润 vs 经营现金流 — 验证"利润≠现金"核心认知</p>
+            </div>
+            <div>
+                <div id="chart_efficiency" class="chart-container" style="height: 260px;"></div>
+                <p class="chart-caption">图2：效率指标变化 — 库存周转与费用率优化</p>
+            </div>
+        </div>
+
+        <div class="highlight-box">
+            <h4><i class="fas fa-exclamation-triangle" style="color: #d97706;"></i> 关键发现：为什么第三年净利润最高但现金流最差？</h4>
+            <p>第三年净利润34万为三年最高，但经营现金流-24万（入不敷出）。原因是：大规模扩产导致存货积压、应收账款增加，虽然账面利润好看，但现金被库存和应收占用。第四年主动调整策略：压缩库存、加快周转、控制资本开支，净利润降至21万，但现金流大幅转正至77万。<strong>这一认知与快手财报中"停止披露GMV、关注经营质量"的逻辑相通——财务分析需要穿透表象看本质。</strong></p>
+        </div>
+
+        <div class="disclaimer">
+            <strong>数据说明：</strong>ERP沙盘为模拟经营场景，所涉图表仅作为分析框架与能力展示。以上数据受沙盘规则与背景设定限制，部分指标（如ROAS、库存周转天数）的计算口径与真实企业存在差异，但分析框架与方法论可迁移至短视频/直播电商业务场景。本人在三届比赛中独立负责预算编制、资金测算、长短贷利息计算、还款计划制定及动态资金调控。
+        </div>
+    </div>
+
+    <!-- 第三部分：快手经营分析观察 -->
+    <div class="section">
+        <div class="section-title">快手经营分析观察 · 基于2025年官方财报</div>
+        <div class="section-subtitle">数据来源：快手科技港交所公告（2026年3月25日发布）及季度业绩报告</div>
+
+        <div class="result-grid" style="grid-template-columns: repeat(4, 1fr);">
+            <div class="result-card">
+                <div class="label">2025全年营收</div>
+                <div class="value">1,428亿</div>
+                <div class="context">同比+12.5%</div>
+            </div>
+            <div class="result-card">
+                <div class="label">经调整净利润</div>
+                <div class="value">206亿</div>
+                <div class="context">同比+16.5%，利润率14.5%</div>
+            </div>
+            <div class="result-card">
+                <div class="label">经营利润率</div>
+                <div class="value">14.5%</div>
+                <div class="context">同比+2.5pct（2024年12.0%）</div>
+            </div>
+            <div class="result-card">
+                <div class="label">销售费用率</div>
+                <div class="value">29.6%</div>
+                <div class="context">同比-2.8pct（2024年32.4%）</div>
+            </div>
+        </div>
+
+        <div class="two-columns" style="margin-top: 1.5rem;">
+            <div>
+                <h4 style="color: #1e3a5f; margin-bottom: 1rem; font-size: 0.95rem;"><i class="fas fa-chart-line"></i> 盈利能力持续提升</h4>
+                <div id="chart_profitability" class="chart-container" style="height: 260px;"></div>
+                <p class="chart-caption">图3：快手经营利润率与经调整净利率趋势（2024-2025）</p>
+            </div>
+            <div>
+                <h4 style="color: #1e3a5f; margin-bottom: 1rem; font-size: 0.95rem;"><i class="fas fa-coins"></i> 费用结构持续优化</h4>
+                <div id="chart_expense" class="chart-container" style="height: 260px;"></div>
+                <p class="chart-caption">图4：快手费用率变化 — 降本增效验证</p>
+            </div>
+        </div>
+
+        <div class="highlight-box">
+            <h4><i class="fas fa-search" style="color: #2c5282;"></i> 作为经营分析师的观察：效率驱动替代规模驱动</h4>
+            <p>快手2025年销售费用率从32.4%降至29.6%，但营收仍保持12.5%增长，说明单位营销投入的产出效率在提升。这与ERP沙盘中"广告费用率13.5%→8.7%"的优化思路相通：<strong>从"花钱买流量"转向"精准投放提效率"</strong>。若入职，我将关注：销售费用率下降是否伴随获客成本（CAC）的优化？不同业务线（广告/电商/直播）的费用效率是否存在结构性差异？</p>
+        </div>
+    </div>
+
+    <!-- 第四部分：关键业务动态跟踪 -->
+    <div class="section">
+        <div class="section-title">关键业务动态跟踪与财务影响分析</div>
+
+        <div class="timeline">
+            <div class="timeline-item">
+                <div class="timeline-header">
+                    <span class="timeline-title">停止单独披露GMV数据</span>
+                    <span class="timeline-date">2025年8月21日 · Q2业绩会</span>
+                </div>
+                <div class="timeline-content">
+                    <p>程一笑宣布从2026年Q1起停止单独披露季度/年度GMV，与阿里、拼多多等行业同行做法保持一致。理由：GMV已不再是衡量电商业务表现的核心指标，未来增长驱动力来自多元电商场景建设、AI赋能商家解决方案及用户体验提升，这些不能通过单一GMV数据充分体现。</p>
+                    <p style="margin-top: 0.5rem;"><strong>经营分析视角：</strong>作为经营分析师，我理解这一决策背后的财务逻辑——GMV高≠经营质量好（与沙盘中"利润≠现金"同理）。未来需关注替代指标：电商收入增速、泛货架GMV占比、动销商家数、用户购买频次等更能反映业务实质的指标。</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-header">
+                    <span class="timeline-title">2026年资本支出预算增至260亿元</span>
+                    <span class="timeline-date">2026年3月25日 · 2025全年业绩会</span>
+                </div>
+                <div class="timeline-content">
+                    <p>CFO金秉宣布2026年集团整体Capex约260亿元，较2025年新增110亿元。用途：可灵大模型及其他基础大模型算力支撑、离线数据存储处理等常规服务器采购、数据/算力中心建设工程。金秉强调：尽管Capex明显增加，仍以保持全年集团层面健康稳健的自由现金流为目标。</p>
+                    <p style="margin-top: 0.5rem;"><strong>经营分析视角：</strong>260亿元为<strong>集团整体资本支出</strong>，非纯"AI投入"。需区分：①可灵AI算力（战略投资）②常规服务器采购与数据中心建设（运营维护）。2025年可灵AI全年收入约10.4亿元，占总收入0.73%，但12月单月收入突破2000万美元（ARR 2.4亿美元），商业化正在加速。作为经营分析师，我会建立"AI投入-产出"跟踪模型，监控ROI及回收周期。</p>
+                </div>
+            </div>
+            <div class="timeline-item">
+                <div class="timeline-header">
+                    <span class="timeline-title">可灵AI商业化突破</span>
+                    <span class="timeline-date">2025年全年 · 收入超10亿元</span>
+                </div>
+                <div class="timeline-content">
+                    <p>可灵AI 2025年Q1-Q4收入分别为1.5亿、2.5亿、3.0亿、3.4亿元，全年超10亿元。11月管理层上调全年收入目标至10亿元（年初目标4.3亿元）。截至2025年底，全球用户突破6000万，服务企业客户超3万家。</p>
+                    <p style="margin-top: 0.5rem;"><strong>经营分析视角：</strong>可灵AI收入增速迅猛（Q4环比+13.3%），但当前占总收入不足1%。需关注：①推理算力毛利率是否持续为正（管理层已确认）②B端企业客户续约率与客单价变化 ③与广告、电商业务的协同效应（如AIGC营销素材消耗）。</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- 第五部分：季度数据详表 -->
+    <div class="section">
+        <div class="section-title">快手2025年季度经营数据详表</div>
+        <div class="section-subtitle">数据来源：快手科技港交所季度业绩公告（已逐一核对）</div>
+
+        <table class="metric-table">
+            <thead>
+                <tr>
+                    <th>指标</th>
+                    <th>Q1</th>
+                    <th>Q2</th>
+                    <th>Q3</th>
+                    <th>Q4</th>
+                    <th>全年</th>
+                    <th>数据来源</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="text-align: left; font-weight: 600;">营收（亿元）</td>
+                    <td>326.00</td>
+                    <td>350.00</td>
+                    <td>355.54</td>
+                    <td>395.68</td>
+                    <td class="badge-up">1,427.76</td>
+                    <td><span class="source-tag source-s">港交所公告</span></td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; font-weight: 600;">营收同比增速</td>
+                    <td>+10.9%</td>
+                    <td>+13.1%</td>
+                    <td>+14.2%</td>
+                    <td>+11.8%</td>
+                    <td class="badge-up">+12.5%</td>
+                    <td><span class="source-tag source-s">港交所公告</span></td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; font-weight: 600;">净利润（IFRS，亿元）</td>
+                    <td>40.00</td>
+                    <td>—</td>
+                    <td>44.89</td>
+                    <td>52.34</td>
+                    <td class="badge-up">186.24</td>
+                    <td><span class="source-tag source-s">港交所公告</span></td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; font-weight: 600;">经调整净利润（亿元）</td>
+                    <td>46.00</td>
+                    <td>56.00</td>
+                    <td>49.86</td>
+                    <td>54.60</td>
+                    <td class="badge-up">206.47</td>
+                    <td><span class="source-tag source-s">港交所公告</span></td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; font-weight: 600;">DAU（亿）</td>
+                    <td>4.08</td>
+                    <td>4.09</td>
+                    <td>4.16</td>
+                    <td>4.08</td>
+                    <td class="badge-neutral">4.10（年均）</td>
+                    <td><span class="source-tag source-s">港交所公告</span></td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; font-weight: 600;">MAU（亿）</td>
+                    <td>7.12</td>
+                    <td>7.15</td>
+                    <td>7.31</td>
+                    <td>7.41</td>
+                    <td class="badge-neutral">7.24（年均）</td>
+                    <td><span class="source-tag source-s">港交所公告</span></td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; font-weight: 600;">电商GMV（亿元）</td>
+                    <td>3,323</td>
+                    <td>3,589</td>
+                    <td>3,850</td>
+                    <td>5,218</td>
+                    <td class="badge-up">15,981</td>
+                    <td><span class="source-tag source-s">港交所公告</span></td>
+                </tr>
+                <tr>
+                    <td style="text-align: left; font-weight: 600;">可灵AI收入（亿元）</td>
+                    <td class="badge-up">1.5+</td>
+                    <td class="badge-up">2.5+</td>
+                    <td class="badge-up">3.0+</td>
+                    <td class="badge-up">3.4</td>
+                    <td class="badge-up">~10.4</td>
+                    <td><span class="source-tag source-a">业绩会披露</span></td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="two-columns" style="margin-top: 1.5rem;">
+            <div>
+                <div id="chart_quarterly_revenue" class="chart-container" style="height: 260px;"></div>
+                <p class="chart-caption">图5：快手2025年季度营收与经调整净利润趋势</p>
+            </div>
+            <div>
+                <div id="chart_user_growth" class="chart-container" style="height: 260px;"></div>
+                <p class="chart-caption">图6：快手2025年季度DAU与MAU变化</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- 第六部分：附录 -->
+    <div class="section">
+        <div class="section-title">附录：数据来源与验证说明</div>
+
+        <h4 style="color: #1e3a5f; margin: 1.5rem 0 1rem; font-size: 0.95rem;">快手财报数据来源</h4>
+        <table class="source-table">
+            <thead>
+                <tr>
+                    <th style="width: 25%;">数据项</th>
+                    <th style="width: 20%;">数值</th>
+                    <th style="width: 35%;">来源</th>
+                    <th style="width: 20%;">发布日期</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>2025全年营收</td>
+                    <td>1,427.76亿元</td>
+                    <td><a href="https://stockn.xueqiu.com/01024/20260325340416.pdf" target="_blank">快手科技港交所公告（PDF）</a></td>
+                    <td>2026-03-25</td>
+                </tr>
+                <tr>
+                    <td>2025全年经调整净利润</td>
+                    <td>206.47亿元</td>
+                    <td><a href="https://stockn.xueqiu.com/01024/20260325340416.pdf" target="_blank">快手科技港交所公告（PDF）</a></td>
+                    <td>2026-03-25</td>
+                </tr>
+                <tr>
+                    <td>2025全年经营利润/率</td>
+                    <td>206.37亿/14.5%</td>
+                    <td><a href="https://stockn.xueqiu.com/01024/20260325340416.pdf" target="_blank">快手科技港交所公告（PDF）</a></td>
+                    <td>2026-03-25</td>
+                </tr>
+                <tr>
+                    <td>2025全年净利润/率</td>
+                    <td>186.24亿/13.0%</td>
+                    <td><a href="https://stockn.xueqiu.com/01024/20260325340416.pdf" target="_blank">快手科技港交所公告（PDF）</a></td>
+                    <td>2026-03-25</td>
+                </tr>
+                <tr>
+                    <td>2025Q1营收/DAU</td>
+                    <td>326亿/4.08亿</td>
+                    <td><a href="https://finance.sina.com.cn/jjxw/2025-05-29/doc-ineyfkhe3795289.shtml" target="_blank">新浪财经-快手Q1财报</a></td>
+                    <td>2025-05-27</td>
+                </tr>
+                <tr>
+                    <td>2025Q2营收/DAU</td>
+                    <td>350亿/4.09亿</td>
+                    <td><a href="https://news.qq.com/rain/a/20250821A06MI600" target="_blank">腾讯新闻-快手Q2财报</a></td>
+                    <td>2025-08-21</td>
+                </tr>
+                <tr>
+                    <td>2025Q3营收/DAU</td>
+                    <td>355.54亿/4.16亿</td>
+                    <td><a href="https://news.qq.com/rain/a/20251119A0567500" target="_blank">腾讯新闻-快手Q3财报</a></td>
+                    <td>2025-11-19</td>
+                </tr>
+                <tr>
+                    <td>2025Q4营收/DAU</td>
+                    <td>395.68亿/4.08亿</td>
+                    <td><a href="https://finance.sina.com.cn/roll/2026-03-25/doc-inhseyvx9727326.shtml" target="_blank">新浪财经-快手Q4及全年财报</a></td>
+                    <td>2026-03-25</td>
+                </tr>
+                <tr>
+                    <td>2026年Capex预算</td>
+                    <td>约260亿元</td>
+                    <td><a href="https://view.inews.qq.com/a/20260325A06WHH00" target="_blank">腾讯新闻-快手业绩会</a>（CFO金秉）</td>
+                    <td>2026-03-25</td>
+                </tr>
+                <tr>
+                    <td>停止披露GMV</td>
+                    <td>2026Q1起</td>
+                    <td><a href="https://finance.sina.com.cn/roll/2025-08-21/doc-infmuhux4253738.shtml" target="_blank">新浪财经-Q2业绩会</a>（程一笑）</td>
+                    <td>2025-08-21</td>
+                </tr>
+                <tr>
+                    <td>可灵AI全年收入</td>
+                    <td>约10.4亿元</td>
+                    <td><a href="https://www.caixin.com/2026-03-25/102427361.html" target="_blank">财新网-快手财报分析</a></td>
+                    <td>2026-03-25</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <h4 style="color: #1e3a5f; margin: 1.5rem 0 1rem; font-size: 0.95rem;">指标口径说明</h4>
+        <table class="metric-table" style="font-size: 0.8rem;">
+            <thead>
+                <tr>
+                    <th>指标</th>
+                    <th>计算口径</th>
+                    <th>说明</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td style="text-align: left;">经调整净利润</td>
+                    <td style="text-align: left;">净利润+股权激励+投资公允价值变动等调整项</td>
+                    <td style="text-align: left;">非国际财务报告准则计量，更能反映经营实质</td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;">经营利润率</td>
+                    <td style="text-align: left;">经营利润 / 总收入</td>
+                    <td style="text-align: left;">反映核心业务的盈利能力</td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;">销售费用率</td>
+                    <td style="text-align: left;">销售及营销开支 / 总收入</td>
+                    <td style="text-align: left;">反映获客与营销效率</td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;">Capex（资本支出）</td>
+                    <td style="text-align: left;">购置物业、设备及无形资产等长期资产支出</td>
+                    <td style="text-align: left;">包含AI算力、服务器采购、数据中心建设等</td>
+                </tr>
+                <tr>
+                    <td style="text-align: left;">ERP沙盘ROAS</td>
+                    <td style="text-align: left;">广告销售收入 / 广告投入</td>
+                    <td style="text-align: left;">沙盘规则下的简化计算，与真实竞价机制存在差异</td>
+                </tr>
+            </tbody>
+        </table>
+
+        <div class="footnote">
+            <p><strong>报告编制：</strong>金舒敏 · 2026年4月 · 快手经营分析师岗位申请</p>
+            <p style="margin-top: 0.5rem;"><strong>数据核验时间：</strong>2026年4月20日 · 所有快手数据均核对自港交所官方公告及权威财经媒体报道</p>
+            <p style="margin-top: 0.5rem;"><strong>声明：</strong>本作品集仅供求职使用，不构成投资建议。ERP沙盘数据为模拟经营记录，已明确标注来源及限制条件。</p>
+        </div>
+    </div>
+</div>
+
+<!-- ECharts脚本 -->
+<script>
+    // 图1：ERP沙盘 - 净利润 vs 经营现金流
+    var chartProfitCash = echarts.init(document.getElementById('chart_profit_cash'));
+    var optionProfitCash = {
+        tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+        legend: {
+            data: ['净利润(万)', '经营现金流(万)'],
+            bottom: 0,
+            textStyle: { color: '#64748b', fontSize: 11 }
+        },
+        grid: { left: '3%', right: '4%', bottom: '15%', top: '10%', containLabel: true },
+        xAxis: {
+            type: 'category',
+            data: ['第2年', '第3年', '第4年'],
+            axisLabel: { color: '#64748b' },
+            axisLine: { lineStyle: { color: '#e2e8f0' } }
+        },
+        yAxis: {
+            type: 'value',
+            name: '金额(万)',
+            nameTextStyle: { color: '#64748b', fontSize: 11 },
+            axisLabel: { color: '#64748b' },
+            axisLine: { lineStyle: { color: '#e2e8f0' } },
+            splitLine: { lineStyle: { color: '#f1f5f9' } }
+        },
+        series: [
+            {
+                name: '净利润(万)',
+                type: 'bar',
+                data: [11, 34, 21],
+                itemStyle: { color: '#2c5282' },
+                barWidth: '30%',
+                label: { show: true, position: 'top', color: '#2c5282', fontWeight: 'bold', fontSize: 12 }
+            },
+            {
+                name: '经营现金流(万)',
+                type: 'bar',
+                data: [12, -24, 77],
+                itemStyle: { 
+                    color: function(params) {
+                        return params.value >= 0 ? '#059669' : '#dc2626';
+                    }
+                },
+                barWidth: '30%',
+                label: {
+                    show: true,
+                    position: function(params) {
+                        return params.value >= 0 ? 'top' : 'bottom';
+                    },
+                    color: function(params) {
+                        return params.value >= 0 ? '#059669' : '#dc2626';
+                    },
+                    fontWeight: 'bold',
+                    fontSize: 12
+                }
+            }
+        ]
+    };
+    chartProfitCash.setOption(optionProfitCash);
+
+    // 图2：ERP沙盘 - 效率指标
+    var chartEfficiency = echarts.init(document.getElementById('chart_efficiency'));
+    var optionEfficiency = {
+        tooltip: { trigger: 'axis' },
+        legend: {
+            data: ['库存周转天数', '广告费用率(%)'],
+            bottom: 0,
+            textStyle: { color: '#64748b', fontSize: 11 }
+        },
+        grid: { left: '3%', right: '4%', bottom: '15%', top: '10%', containLabel: true },
+        xAxis: {
+            type: 'category',
+            data: ['第2年', '第3年', '第4年'],
+            axisLabel: { color: '#64748b' },
+            axisLine: { lineStyle: { color: '#e2e8f0' } }
+        },
+        yAxis: [
+            {
+                type: 'value',
+                name: '天数',
+                nameTextStyle: { color: '#64748b', fontSize: 11 },
+                axisLabel: { color: '#64748b' },
+                axisLine: { lineStyle: { color: '#e2e8f0' } },
+                splitLine: { lineStyle: { color: '#f1f5f9' } }
+            },
+            {
+                type: 'value',
+                name: '费用率(%)',
+                max: 20,
+                nameTextStyle: { color: '#64748b', fontSize: 11 },
+                axisLabel: { color: '#64748b', formatter: '{value}%' },
+                axisLine: { lineStyle: { color: '#e2e8f0' } }
+            }
+        ],
+        series: [
+            {
+                name: '库存周转天数',
+                type: 'bar',
+                data: [207, 120, 66],
+                itemStyle: { color: '#2c5282' },
+                barWidth: '25%',
+                label: { show: true, position: 'top', color: '#2c5282' }
+            },
+            {
+                name: '广告费用率(%)',
+                type: 'line',
+                yAxisIndex: 1,
+                data: [13.5, 10.5, 8.7],
+                lineStyle: { color: '#d97706', width: 2 },
+                itemStyle: { color: '#d97706' },
+                symbol: 'circle',
+                symbolSize: 6,
+                label: { show: true, position: 'top', formatter: '{c}%', color: '#d97706' }
+            }
+        ]
+    };
+    chartEfficiency.setOption(optionEfficiency);
+
+    // 图3：快手盈利能力趋势
+    var chartProfitability = echarts.init(document.getElementById('chart_profitability'));
+    var optionProfitability = {
+        tooltip: { trigger: 'axis' },
+        legend: {
+            data: ['经营利润率(%)', '经调整净利率(%)'],
+            bottom: 0,
+            textStyle: { color: '#64748b', fontSize: 11 }
+        },
+        grid: { left: '3%', right: '4%', bottom: '15%', top: '10%', containLabel: true },
+        xAxis: {
+            type: 'category',
+            data: ['2024全年', '2025Q1', '2025Q2', '2025Q3', '2025Q4', '2025全年'],
+            axisLabel: { color: '#64748b', fontSize: 10 },
+            axisLine: { lineStyle: { color: '#e2e8f0' } }
+        },
+        yAxis: {
+            type: 'value',
+            name: '利润率(%)',
+            min: 10,
+            max: 18,
+            nameTextStyle: { color: '#64748b', fontSize: 11 },
+            axisLabel: { color: '#64748b', formatter: '{value}%' },
+            axisLine: { lineStyle: { color: '#e2e8f0' } },
+            splitLine: { lineStyle: { color: '#f1f5f9' } }
+        },
+        series: [
+            {
+                name: '经营利润率(%)',
+                type: 'line',
+                data: [12.0, 13.1, 15.1, 14.9, 14.6, 14.5],
+                lineStyle: { color: '#2c5282', width: 2 },
+                itemStyle: { color: '#2c5282' },
+                symbol: 'circle',
+                symbolSize: 6,
+                label: { show: true, position: 'top', formatter: '{c}%', color: '#2c5282', fontSize: 10 }
+            },
+            {
+                name: '经调整净利率(%)',
+                type: 'line',
+                data: [14.0, 14.1, 16.0, 14.0, 13.8, 14.5],
+                lineStyle: { color: '#059669', width: 2 },
+                itemStyle: { color: '#059669' },
+                symbol: 'circle',
+                symbolSize: 6,
+                label: { show: true, position: 'bottom', formatter: '{c}%', color: '#059669', fontSize: 10 }
+            }
+        ]
+    };
+    chartProfitability.setOption(optionProfitability);
+
+    // 图4：快手费用率变化
+    var chartExpense = echarts.init(document.getElementById('chart_expense'));
+    var optionExpense = {
+        tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
+        legend: {
+            data: ['销售费用率(%)', '研发费用率(%)', '行政费用率(%)'],
+            bottom: 0,
+            textStyle: { color: '#64748b', fontSize: 11 }
+        },
+        grid: { left: '3%', right: '4%', bottom: '15%', top: '10%', containLabel: true },
+        xAxis: {
+            type: 'category',
+            data: ['2024全年', '2025全年'],
+            axisLabel: { color: '#64748b' },
+            axisLine: { lineStyle: { color: '#e2e8f0' } }
+        },
+        yAxis: {
+            type: 'value',
+            name: '费用率(%)',
+            nameTextStyle: { color: '#64748b', fontSize: 11 },
+            axisLabel: { color: '#64748b', formatter: '{value}%' },
+            axisLine: { lineStyle: { color: '#e2e8f0' } },
+            splitLine: { lineStyle: { color: '#f1f5f9' } }
+        },
+        series: [
+            {
+                name: '销售费用率(%)',
+                type: 'bar',
+                data: [32.4, 29.6],
+                itemStyle: { color: '#2c5282' },
+                barWidth: '20%',
+                label: { show: true, position: 'top', formatter: '{c}%', color: '#2c5282', fontWeight: 'bold' }
+            },
+            {
+                name: '研发费用率(%)',
+                type: 'bar',
+                data: [9.6, 10.1],
+                itemStyle: { color: '#d97706' },
+                barWidth: '20%',
+                label: { show: true, position: 'top', formatter: '{c}%', color: '#d97706', fontWeight: 'bold' }
+            },
+            {
+                name: '行政费用率(%)',
+                type: 'bar',
+                data: [2.3, 2.3],
+                itemStyle: { color: '#64748b' },
+                barWidth: '20%',
+                label: { show: true, position: 'top', formatter: '{c}%', color: '#64748b', fontWeight: 'bold' }
+            }
+        ]
+    };
+    chartExpense.setOption(optionExpense);
+
+    // 图5：快手季度营收与利润
+    var chartQuarterlyRevenue = echarts.init(document.getElementById('chart_quarterly_revenue'));
+    var optionQuarterlyRevenue = {
+        tooltip: { trigger: 'axis', axisPointer: { type: 'cross' } },
+        legend: {
+            data: ['营收(亿元)', '经调整净利润(亿元)'],
+            bottom: 0,
+            textStyle: { color: '#64748b', fontSize: 11 }
+        },
+        grid: { left: '3%', right: '4%', bottom: '15%', top: '10%', containLabel: true },
+        xAxis: {
+            type: 'category',
+            data: ['Q1', 'Q2', 'Q3', 'Q4'],
+            axisLabel: { color: '#64748b' },
+            axisLine: { lineStyle: { color: '#e2e8f0' } }
+        },
+        yAxis: [
+            {
+                type: 'value',
+                name: '营收(亿元)',
+                nameTextStyle: { color: '#64748b', fontSize: 11 },
+                axisLabel: { color: '#64748b' },
+                axisLine: { lineStyle: { color: '#e2e8f0' } },
+                splitLine: { lineStyle: { color: '#f1f5f9' } }
+            },
+            {
+                type: 'value',
+                name: '经调整净利润(亿元)',
+                nameTextStyle: { color: '#64748b', fontSize: 11 },
+                axisLabel: { color: '#64748b' },
+                axisLine: { lineStyle: { color: '#e2e8f0' } }
+            }
+        ],
+        series: [
+            {
+                name: '营收(亿元)',
+                type: 'bar',
+                data: [326, 350, 355.54, 395.68],
+                itemStyle: { color: '#2c5282' },
+                barWidth: '30%',
+                label: { show: true, position: 'top', color: '#2c5282', fontSize: 10 }
+            },
+            {
+                name: '经调整净利润(亿元)',
+                type: 'line',
+                yAxisIndex: 1,
+                data: [46, 56, 49.86, 54.6],
+                lineStyle: { color: '#059669', width: 2 },
+                itemStyle: { color: '#059669' },
+                symbol: 'circle',
+                symbolSize: 6,
+                label: { show: true, position: 'top', color: '#059669', fontSize: 10 }
+            }
+        ]
+    };
+    chartQuarterlyRevenue.setOption(optionQuarterlyRevenue);
+
+    // 图6：用户增长趋势
+    var chartUserGrowth = echarts.init(document.getElementById('chart_user_growth'));
+    var optionUserGrowth = {
+        tooltip: { trigger: 'axis' },
+        legend: {
+            data: ['DAU(亿)', 'MAU(亿)'],
+            bottom: 0,
+            textStyle: { color: '#64748b', fontSize: 11 }
+        },
+        grid: { left: '3%', right: '4%', bottom: '15%', top: '10%', containLabel: true },
+        xAxis: {
+            type: 'category',
+            data: ['Q1', 'Q2', 'Q3', 'Q4'],
+            axisLabel: { color: '#64748b' },
+            axisLine: { lineStyle: { color: '#e2e8f0' } }
+        },
+        yAxis: [
+            {
+                type: 'value',
+                name: 'DAU(亿)',
+                min: 3.8,
+                max: 4.4,
+                nameTextStyle: { color: '#64748b', fontSize: 11 },
+                axisLabel: { color: '#64748b' },
+                axisLine: { lineStyle: { color: '#e2e8f0' } },
+                splitLine: { lineStyle: { color: '#f1f5f9' } }
+            },
+            {
+                type: 'value',
+                name: 'MAU(亿)',
+                min: 6.8,
+                max: 7.6,
+                nameTextStyle: { color: '#64748b', fontSize: 11 },
+                axisLabel: { color: '#64748b' },
+                axisLine: { lineStyle: { color: '#e2e8f0' } }
+            }
+        ],
+        series: [
+            {
+                name: 'DAU(亿)',
+                type: 'line',
+                data: [4.08, 4.09, 4.16, 4.08],
+                lineStyle: { color: '#2c5282', width: 2 },
+                itemStyle: { color: '#2c5282' },
+                symbol: 'circle',
+                symbolSize: 8,
+                label: { show: true, position: 'top', color: '#2c5282', fontSize: 10 }
+            },
+            {
+                name: 'MAU(亿)',
+                type: 'line',
+                yAxisIndex: 1,
+                data: [7.12, 7.15, 7.31, 7.41],
+                lineStyle: { color: '#d97706', width: 2 },
+                itemStyle: { color: '#d97706' },
+                symbol: 'circle',
+                symbolSize: 8,
+                label: { show: true, position: 'top', color: '#d97706', fontSize: 10 }
+            }
+        ]
+    };
+    chartUserGrowth.setOption(optionUserGrowth);
+
+    // 响应式
+    window.addEventListener('resize', function() {
+        chartProfitCash.resize();
+        chartEfficiency.resize();
+        chartProfitability.resize();
+        chartExpense.resize();
+        chartQuarterlyRevenue.resize();
+        chartUserGrowth.resize();
+    });
+</script>
+</body>
+</html>
